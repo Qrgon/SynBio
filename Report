@@ -1,0 +1,9 @@
+import pandas as pd
+print("Pandas imported successfully, version: "+pd.__version__)
+import scipy as sm
+from scipy.stats import *
+print("SciPy imported successfully, version: "+sm.__version__)
+import seaborn as sns
+print("Seaborn imported successfully, version: "+sns.__version__)
+sns.set(style="whitegrid")
+from sklearn.decomposition import PCA #For performing principle component analysis
