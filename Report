@@ -7,17 +7,19 @@ import seaborn as sns
 print("Seaborn imported successfully, version: "+sns.__version__)
 sns.set(style="whitegrid")
 from sklearn.decomposition import PCA #For performing principle component analysis
+
 print("For this report I will be using 'Students Performance in Exams' dataset from kaggle available from: https://www.kaggle.com/spscientist/students-performance-in-exams")
-data_all = pd.read_csv('StudentsPerformance.csv')
-data_all.head()
-count_row = data_all.shape[0]
-count_col = data_all.shape[1]
-print("This dataset contains ", count_row, " entries and ", count_col, " properties for each: ", list(data_all.columns))
+df = pd.read_csv('StudentsPerformance.csv')
+
+df.head()
+count_row = df.shape[0]
+count_col = df.shape[1]
+print("This dataset contains ", count_row, " entries and ", count_col, " properties for each: ", list(df.columns))
 
 import plotly.graph_objects as go
 fig = go.Figure()
 fig.add_trace(go.Histogram(
-    x=data_all["gender"],
+    x=df["gender"],
     name='Students', # name used in legend and hover labels
     xbins=dict( # bins used for histogram
         size=0.1
@@ -38,3 +40,9 @@ fig.update_layout(
 )
 
 fig.show()
+
+males = df["gender"] == "male"
+count_males = df[males].shape[0]
+females = df["gender"] == "female"
+count_females = df[females].shape[0]
+print("Of ", count_row, " students there are ", count_males, " male students and ", count_females, " female students.")
