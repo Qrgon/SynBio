@@ -7,5 +7,5 @@ import seaborn as sns
 print("Seaborn imported successfully, version: "+sns.__version__)
 sns.set(style="whitegrid")
 from sklearn.decomposition import PCA #For performing principle component analysis
-data_all = pd.read_csv('trolley.csv')
+data_all = pd.read_csv('StudentsPerformance.csv')
 data_all.head()
