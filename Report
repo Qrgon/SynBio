@@ -1,3 +1,4 @@
+#importing libraries
 import pandas as pd
 print("Pandas imported successfully, version: "+pd.__version__)
 import scipy as sm
@@ -7,14 +8,26 @@ import seaborn as sns
 print("Seaborn imported successfully, version: "+sns.__version__)
 sns.set(style="whitegrid")
 from sklearn.decomposition import PCA #For performing principle component analysis
-
-print("For this report I will be using 'Students Performance in Exams' dataset from kaggle available from: https://www.kaggle.com/spscientist/students-performance-in-exams")
+#importing dataset
+print()
+print("For this report I will be using 'Students Performance in Exams' dataset from Kaggle available from: https://www.kaggle.com/spscientist/students-performance-in-exams")
+print()
+print("This dataset is most probably fictional and consits of Marks secured by the students in high school Students from the United States:")
 df = pd.read_csv('StudentsPerformance.csv')
-
-df.head()
+print()
+#looking at the data
+print(df.head(5))
+print()
 count_row = df.shape[0]
 count_col = df.shape[1]
-print("This dataset contains ", count_row, " entries and ", count_col, " properties for each: ", list(df.columns))
+print("This dataset contains ", count_row, " entries and ", count_col, " properties for each entry: ", list(df.columns))
+print()
+#checking for missing data
+B = df.isnull().sum()
+print(B)
+print(" There is no missing data on this dataset")
+print()
+#gender preview
 
 import plotly.graph_objects as go
 fig = go.Figure()
@@ -45,4 +58,30 @@ males = df["gender"] == "male"
 count_males = df[males].shape[0]
 females = df["gender"] == "female"
 count_females = df[females].shape[0]
+
 print("Of ", count_row, " students there are ", count_males, " male students and ", count_females, " female students.")
+print()
+#Race preview
+fig = go.Figure()
+fig.add_trace(go.Histogram(
+    x=df["race/ethnicity"],
+    name='Students', # name used in legend and hover labels
+    xbins=dict( # bins used for histogram
+        size=0.1
+        
+    ),
+    marker_color='#EB89B6',
+    opacity=0.75
+))
+
+
+fig.update_layout(
+    title_text='Student race distribution histogram', # title of plot
+    xaxis_title_text='Etchnicity', # xaxis label
+    yaxis_title_text='Count', # yaxis label
+    showlegend=True
+   
+    
+)
+
+fig.show()
